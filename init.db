@@ -1,0 +1,32 @@
+CREATE TABLE teams
+(
+		id   SERIAL NOT NULL
+				CONSTRAINT teams_pkey
+				PRIMARY KEY,
+		name VARCHAR(255),
+		link VARCHAR(255)
+);
+
+CREATE TABLE players
+(
+		id      SERIAL NOT NULL
+				CONSTRAINT players_pkey
+				PRIMARY KEY,
+		name    VARCHAR(255),
+		team_id INTEGER
+				CONSTRAINT players_teams_id_fk
+				REFERENCES teams,
+		link    VARCHAR(255)
+);
+
+CREATE TABLE matches
+(
+		id         SERIAL NOT NULL
+				CONSTRAINT matches_pkey
+				PRIMARY KEY,
+		diff_score INTEGER,
+		opponent   VARCHAR(255),
+		player_id  INTEGER
+				CONSTRAINT matches_players_id_fk
+				REFERENCES players
+);
